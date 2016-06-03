@@ -1,8 +1,8 @@
 <%= form_for(@blog) do |f| %>
+
   <% if @blog.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
-
       <ul>
       <% @blog.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,13 +13,13 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: 'タイトル' %>
   </div>
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, class: 'form-control', placeholder: '内容' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
