@@ -8,12 +8,10 @@
 </head>
 <body>
 
-<%= link_to 'Achieve', root_path %>
-<%= link_to 'ブログ', blogs_path %>
-<%= link_to 'お問い合わせ', contacts_new_path %>
-<%= link_to '問い合わせ一覧', contacts_receive_path %>
-
+<%= render 'shared/header' %>
 <%= yield %>
+<%= render 'shared/footer' %>
+
 
 </body>
 </html>

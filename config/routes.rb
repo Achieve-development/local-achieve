@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 #トップ画面
-  root 'blogs#index'
+  root 'top#index'
 
 #ブログ投稿機能
   resources :blogs
