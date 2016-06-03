@@ -1,0 +1,30 @@
+<h1>ブログ投稿一覧</h1>
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Blogs</h1>
+
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= blog.content %></td>
+        <td><%= link_to 'Show', blog, class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog), class: 'btn btn-default' %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blog', new_blog_path, class: 'btn btn-primary' %>
