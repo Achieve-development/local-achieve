@@ -1,0 +1,23 @@
+<%= form_for @contact, url: contacts_create_path do |f| %>
+  <%= f.label :name %>
+  <%= f.hidden_field :name %>
+  <%= @contact.name %>
+
+  <%= f.label :email %>
+  <%= f.hidden_field :email %>
+  <%= @contact.email %>
+
+  <%= f.label :message %>
+  <%= f.hidden_field :message %>
+  <%= simple_format(@contact.message) %>
+
+  <%= f.submit '送信する', name: 'commit' %>
+<% end %>
+
+
+<%= form_for @contact, url: contacts_new_path do |f| %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :email %>
+  <%= f.hidden_field :message %>
+  <%= f.submit '戻る', name: 'back' %>
+<% end %>
