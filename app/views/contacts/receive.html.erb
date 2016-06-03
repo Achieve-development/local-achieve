@@ -1,0 +1,5 @@
+<% @contacts.each do |contact| %>
+  <%= contact.name %>
+  <%= contact.email %>
+  <%= simple_format(contact.message) %>
+<% end %>
