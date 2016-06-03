@@ -1,23 +1,30 @@
+<h1>お問い合わせ確認</h1>
+
 <%= form_for @contact, url: contacts_create_path do |f| %>
-  <%= f.label :name %>
-  <%= f.hidden_field :name %>
-  <%= @contact.name %>
+  <div class="field">
+    <h3>名前：</h3>
+    <p><%= @contact.name %></p>
+    <%= f.hidden_field :name %>
+  </div>
 
-  <%= f.label :email %>
-  <%= f.hidden_field :email %>
-  <%= @contact.email %>
+  <div class="field">
+    <h3>メールアドレス：</h3>
+    <p><%= @contact.email %></p>
+    <%= f.hidden_field :email %>
+  </div>
 
-  <%= f.label :message %>
-  <%= f.hidden_field :message %>
-  <%= simple_format(@contact.message) %>
+  <div class="field">
+    <h3>お問い合わせ内容：</h3>
+    <p><%= simple_format(@contact.message) %></p>
+    <%= f.hidden_field :email %>
+  </div>
 
-  <%= f.submit '送信する', name: 'commit' %>
+  <%= f.submit '送信する', name: 'commit', class: 'btn btn-primary' %>
 <% end %>
-
 
 <%= form_for @contact, url: contacts_new_path do |f| %>
   <%= f.hidden_field :name %>
   <%= f.hidden_field :email %>
   <%= f.hidden_field :message %>
-  <%= f.submit '戻る', name: 'back' %>
+  <%= f.submit '戻る', name: 'back', class: 'btn btn-default' %>
 <% end %>
