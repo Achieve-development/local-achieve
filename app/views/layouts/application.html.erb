@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LocalAchieve</title>
+  <title>YujiMiyashita</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<%= link_to 'Achieve', root_path %>
+<%= link_to 'ブログ', blogs_path %>
+<%= link_to 'お問い合わせ', contacts_new_path %>
+<%= link_to '問い合わせ一覧', contacts_receive_path %>
 
 <%= yield %>
 
