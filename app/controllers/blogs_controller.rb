@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @blogs = Blog.all
@@ -6,6 +7,7 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
+    @comment = @blog.comments.build
   end
 
   def new

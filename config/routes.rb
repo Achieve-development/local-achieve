@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 #トップ画面
   root 'top#index'
 
-#ブログ投稿機能
+#ブログ投稿機能（コメントも投稿できるようにする）
   resources :blogs
 
 #お問い合わせ投稿機能
@@ -16,8 +16,6 @@ Rails.application.routes.draw do
   get 'contacts/receive' => 'contacts#receive'
 
 #ログイン機能
-
-#ログイン機能
-
+  devise_for :users
 
 end
