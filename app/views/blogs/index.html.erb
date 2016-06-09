@@ -6,6 +6,8 @@
     <tr>
       <th>Title</th>
       <th>Content</th>
+      <th>Created_at</th>
+      <th>Nick_name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,6 +17,8 @@
       <tr>
         <td><%= blog.title %></td>
         <td><%= blog.content %></td>
+        <td><em><%= blog.created_at %></em></td>
+        <td><em><%= blog.user.nick_name %></em></td>
         <td><%= link_to 'Show', blog, class: 'btn btn-info' %></td>
         <td><%= link_to 'Edit', edit_blog_path(blog), class: 'btn btn-default' %></td>
         <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
