@@ -7,7 +7,6 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    @comment = @blog.comments.build
   end
 
   def new
@@ -45,6 +44,6 @@ class BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title, :content)
+      params.require(:blog).permit(:title, :content, :user_id)
     end
 end
