@@ -6,7 +6,9 @@ class BlogsController < ApplicationController
   end
 
   def show
-    @blog = Blog.find(params[:id])
+    @blog = current_user.blogs.find(params[:id])
+    @comments = @blog.comments
+    @comment = @blog.comments.build
   end
 
   def new
@@ -14,7 +16,7 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog = Blog.find(params[:id])
+    @blog = current_user.blogs.find(params[:id])
   end
 
   def create
@@ -28,7 +30,7 @@ class BlogsController < ApplicationController
   end
 
   def update
-    @blog = Blog.find(params[:id])
+    @blog = current_user.blogs.find(params[:id])
     if @blog.update(blog_params)
       redirect_to @blog, notice: 'Blog was successfully updated.'
     else
@@ -37,7 +39,7 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog = Blog.find(params[:id])
+    @blog = current_user.blogs.find(params[:id])
     @blog.destroy
     redirect_to blogs_url, notice: 'Blog was successfully destroyed.'
   end
