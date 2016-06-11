@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-
+  before_action :authenticate_user!
+  
   def index
     @comments = Comment.all
   end
@@ -22,26 +23,36 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to blog_path(@comment.blog_id), notice: 'Comment was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+
+      if @comment.save
+        @blog = @comment.blog
+        binding.pry
+        format.html { redirect_to blog_path(@comment.blog_id) }
+        format.js { render :create}
+      else
+        format.html { render :new }
+      end
     end
   end
 
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      redirect_to blog_path(@comment.blog_id), notice: 'Comment was successfully updated.'
+      redirect_to blog_path(@comment.blog_id)
     else
       render :edit
     end
   end
 
+
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to blog_path(@comment.blog), notice: 'Comment was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to blog_path(@comment.blog) }
+      format.js { render :index }
+    end
   end
 
   private

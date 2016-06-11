@@ -9,6 +9,12 @@ class User < ActiveRecord::Base
   #ユーザーとコメントは１対多の関係・ユーザーが削除されたらそれにひも付くコメントも削除される
   has_many :comments, dependent: :destroy
 
+  #ユーザーと質問は１対多の関係・ユーザーが削除されたらそれにひも付く質問も削除される
+  has_many :questions, dependent: :destroy
+
+  #ユーザーと答えは１対多の関係・ユーザーが削除されたらそれにひも付く答えも削除される
+  has_many :answers, dependent: :destroy
+
   #Facebookからユーザーのデータを取得するメソッド
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first

@@ -1,0 +1,13 @@
+<h1>カテゴリー新規</h1>
+  <%= form_for(@category) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+  <% end %>
+
+<h1>カテゴリー一覧</h1>
+<% @categories.each do |category| %>
+  <%= category.name %>
+  <%= link_to '削除する', category_path(category.id), method: :delete %>
+  </br>
+<% end %>

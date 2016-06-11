@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
-  resources :comments
+
+  resources :answers do
+    resources :questions
+  end
+
+  resources :categories, only: [:index, :create, :destroy]
+  resources :languages, only: [:index, :create, :destroy]
+
 #トップ画面
   root 'top#index'
 
@@ -8,7 +15,12 @@ Rails.application.routes.draw do
   resources :blogs do
     resources :comments
   end
-  
+
+#Q&A機能
+  resources :questions do
+    resources :answers
+  end
+
 #お問い合わせ投稿機能
   get 'contacts/new' => 'contacts#new'
   post 'contacts/new' => 'contacts#new'

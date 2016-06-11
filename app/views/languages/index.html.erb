@@ -1,0 +1,13 @@
+<h1>プログラミング言語新規</h1>
+  <%= form_for(@language) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+  <% end %>
+
+<h1>プログラミング言語一覧</h1>
+<% @languages.each do |language| %>
+  <%= language.name %>
+  <%= link_to '削除する', language_path(language.id), method: :delete %>
+  </br>
+<% end %>
