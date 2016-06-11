@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :comments
 #トップ画面
   root 'top#index'
 
 #ブログ投稿機能（コメントも投稿できるようにする）
-  resources :blogs
-
+  resources :blogs do
+    resources :comments
+  end
+  
 #お問い合わせ投稿機能
   get 'contacts/new' => 'contacts#new'
   post 'contacts/new' => 'contacts#new'
