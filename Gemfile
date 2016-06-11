@@ -24,21 +24,28 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'therubyracer', platforms: :ruby
-
+#Bootsrtapの大元
 gem 'bootstrap-sass', '~> 3.2.0'
+#ソーシャルボタンを簡単に実装するためのGem
+gem 'bootstrap-social-rails'
+
+gem 'font-awesome-rails'
 
 gem 'autoprefixer-rails'
 
 gem 'devise'
+
+gem 'omniauth'
+
+gem 'omniauth-twitter'
+
+gem 'omniauth-facebook'
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem 'web-console', '~> 2.0'
-
-  gem 'spring'
 end
 
 group :development do

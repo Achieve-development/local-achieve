@@ -49,12 +49,17 @@ ActiveRecord::Schema.define(version: 20160609055631) do
     t.string   "unconfirmed_email"
     t.string   "user_name"
     t.string   "nick_name"
+    t.string   "image_url"
+    t.string   "uid",                    default: "", null: false
+    t.string   "provider",               default: "", null: false
     t.text     "profile"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["provider"], name: "index_users_on_provider", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", unique: true, using: :btree
 
 end
