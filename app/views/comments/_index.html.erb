@@ -1,11 +1,9 @@
 <h1>コメント</h1>
 
-<ul><% @comments.each do |comment| %>
-  <% unless comment.id.nil? #コメントが１件も存在しなかったら %>
-  <li><%= comment.user %></li>
-  <li><%= comment.content %></li>
-  <li><%= link_to 'Edit', edit_blog_comment_path(@blog.comment) %></li>
-  <li><%= link_to 'Destroy', blog_comment_path, method: :delete,
-          data: { confirm: 'Are you sure?' } %></li>
-  <% end %>
-<% end %></ul>
+  <ul><% @comments.each do |comment| %>
+    <% unless comment.id.nil? %>
+    <li><%= comment.content %> by <%= comment.user.nick_name %></li>
+    <%= link_to '編集する', edit_blog_comment_path(comment.blog_id, comment.id), class: 'btn btn-xs btn-primary' %>  |
+    <%= link_to '削除する', blog_comment_path(comment.blog_id, comment.id), method: :delete, class: 'btn btn-xs btn-danger' %>
+    <% end %>
+  <% end %></ul>

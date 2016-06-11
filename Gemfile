@@ -75,12 +75,6 @@ group :development, :test do
 
   gem 'pry'
 
-  gem 'pry-remote'
-
-  gem 'pry-nav'
-
-  gem 'pry-stack_explorer'
-
   gem 'quiet_assets'
 
   gem 'tapp'
