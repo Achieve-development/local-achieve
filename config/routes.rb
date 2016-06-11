@@ -15,7 +15,12 @@ Rails.application.routes.draw do
 #お問い合わせ受信機能
   get 'contacts/receive' => 'contacts#receive'
 
-#ログイン機能
-  devise_for :users
+#ログイン機能・SNS認証機能
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
 
 end
