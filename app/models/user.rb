@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   # Twitterからユーザーのデータを取得するメソッド
-  def find_for_twitter_oauth(auth, signed_in_resource=nil)
+  def self.find_for_twitter_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
     user = User.new(
       user_name: auth.info.nickname,
