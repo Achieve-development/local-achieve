@@ -1,2 +1,2 @@
-$("#comments_area").html("<%= escape_javascript(render partial: 'comments/index',locals: { comments: @blog.comments }) %>");
+$("#comments_area").html("<%= escape_javascript(render partial: 'comments/index',locals: { comments: @comments }) %>");
 $('text').val('')

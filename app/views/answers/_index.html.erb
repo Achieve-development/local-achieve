@@ -1,0 +1,8 @@
+<% unless @answers.nil? %>
+  <% @answers.each do |answer| %>
+    <%= simple_format(answer.content) %>
+    <%= answer.user.nick_name %>
+    <%= link_to 'Edit', edit_question_answer_path(answer.question, answer.id) %>
+    <%= link_to 'Destroy', question_answer_path(answer.question, answer.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>

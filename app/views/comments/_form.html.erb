@@ -1,4 +1,4 @@
-<%= form_for(@comment, remote: true) do |f| %>
+<%= form_for(comment, url: blog_comments_path(comment.blog), remote: true) do |f| %>
 
   <div class="field">
     <%= f.label :content %><br>

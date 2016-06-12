@@ -7,8 +7,8 @@ class BlogsController < ApplicationController
 
   def show
     @blog = current_user.blogs.find(params[:id])
-    @comments = @blog.comments
     @comment = @blog.comments.build
+    @comments = @blog.comments
   end
 
   def new
