@@ -32,7 +32,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       #Omniauth
       t.string :user_name
-      t.string :nick_name
+      t.string :nick_name, default: '（変更してください）'
       t.string :image_url
       t.string :uid, null: false, default: ""
       t.string :provider, null: false, default: ""

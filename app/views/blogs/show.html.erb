@@ -14,7 +14,7 @@
 <%= link_to 'ブログを編集する', edit_blog_path(@blog), class: 'btn btn-primary' %>
 
 <div id="comments_area">
-  <%= render partial: 'comments/index', locals: { comment: @comments } %>
+  <%= render partial: 'comments/index', locals: { comments: @comments } %>
 </div>
 <%= render partial: 'comments/form', locals: { comment: @comment } %>
 
