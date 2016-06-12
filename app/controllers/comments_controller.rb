@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 
 
   def show
-    @comment = Comment.find(params[:id])
+    @comment = current_user.comments.find(params[:id])
   end
 
 
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
 
   def edit
-    @comment = Comment.find(params[:id])
+    @comment = current_user.comments.find(params[:id])
   end
 
 
@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
+    @comment = current_user.comments.find(params[:id])
     if @comment.update(comment_params)
       redirect_to blog_path(@comment.blog_id)
     else
@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
 
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = current_user.comments.find(params[:id])
     @comment.destroy
     @comments = @comment.blog.comments
     respond_to do |format|
