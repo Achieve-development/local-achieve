@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @comments = Comment.all
   end
@@ -26,10 +26,9 @@ class CommentsController < ApplicationController
     respond_to do |format|
 
       if @comment.save
-        @blog = @comment.blog
-        binding.pry
+        @comments = @comment.blog.comments
         format.html { redirect_to blog_path(@comment.blog_id) }
-        format.js { render :create}
+        format.js { render :index }
       else
         format.html { render :new }
       end
@@ -49,8 +48,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
+    @comments = @comment.blog.comments
     respond_to do |format|
-      format.html { redirect_to blog_path(@comment.blog) }
+      #format.html { redirect_to blog_path(@comment.blog) }
       format.js { render :index }
     end
   end

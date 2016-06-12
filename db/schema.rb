@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160611090723) do
+ActiveRecord::Schema.define(version: 20160611082252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,12 @@ ActiveRecord::Schema.define(version: 20160611090723) do
   create_table "blogs", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
   end
+
+  add_index "blogs", ["user_id"], name: "index_blogs_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -69,23 +71,22 @@ ActiveRecord::Schema.define(version: 20160611090723) do
   create_table "questions", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
-    t.integer  "language"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.integer  "language_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
+  add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",           null: false
+    t.string   "encrypted_password",     default: "",           null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -95,13 +96,13 @@ ActiveRecord::Schema.define(version: 20160611090723) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "user_name"
-    t.string   "nick_name"
+    t.string   "nick_name",              default: "（変更してください）"
     t.string   "image_url"
-    t.string   "uid",                    default: "", null: false
-    t.string   "provider",               default: "", null: false
+    t.string   "uid",                    default: "",           null: false
+    t.string   "provider",               default: "",           null: false
     t.text     "profile"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -111,7 +112,9 @@ ActiveRecord::Schema.define(version: 20160611090723) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "blogs", "users"
   add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"
-  add_foreign_key "questions", "users"
+  add_foreign_key "questions", "categories"
+  add_foreign_key "questions", "languages"
 end

@@ -7,7 +7,8 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    #@answer = @question.answer.build
+    @answers = @question.answers
+    @answer = @question.answers.build
   end
 
   def new
@@ -24,7 +25,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.js {  }
+        format.js
       else
         format.html { render :new }
       end
@@ -36,7 +37,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.js {  }
+        format.js
       else
         format.html { render :edit }
       end
@@ -48,7 +49,7 @@ class QuestionsController < ApplicationController
     @question.destroy
     respond_to do |format|
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-      format.js {  }
+      format.js
     end
   end
 

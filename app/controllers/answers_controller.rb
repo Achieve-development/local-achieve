@@ -24,8 +24,9 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.js {  }
+        @question = @answer.question
+        format.html { redirect_to question_path(@question.id) }
+        format.js
       else
         format.html { render :new }
       end
@@ -34,10 +35,11 @@ class AnswersController < ApplicationController
 
   def update
     @answer = Answer.find(params[:id])
+    @question = @answer.question
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.js {  }
+        format.html { redirect_to redirect_to question_path(@question.id) }
+        format.js
       else
         format.html { render :edit }
       end
@@ -46,9 +48,10 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer = Answer.find(params[:id])
+    @question = @answer.question
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+      format.html { redirect_to redirect_to question_path(@question.id) }
       format.js {  }
     end
   end
