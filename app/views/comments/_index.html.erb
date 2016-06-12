@@ -1,10 +1,10 @@
 <h1>コメント</h1>
 <ul><% @comments.each do |comment| %>
   <% unless comment.id.nil? %>
-  <li><%= comment.content %> by <%= comment.user.nick_name %></li>
-  <% if comment.user.id == current_user.id %>
-  <%= link_to '編集する', edit_blog_comment_path(comment.blog, comment), class: 'btn btn-xs btn-primary' %>  |
-  <%= link_to '削除する', blog_comment_path(comment.blog, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
-  <% end %>
+      <li><%= comment.content %> by <%= comment.user.nick_name %></li>
+    <% if comment.user.id == current_user.id %>
+      <%= link_to '編集する', edit_blog_comment_path(comment.blog, comment), class: 'btn btn-xs btn-primary' %>  |
+      <%= link_to '削除する', blog_comment_path(comment.blog, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
+    <% end %>
   <% end %>
 <% end %></ul>
