@@ -16,7 +16,7 @@ class AnswersController < ApplicationController
 
 
   def edit
-    @answer = Answer.find(params[:id])
+    @answer = current_user.answers.find(params[:id])
   end
 
 
@@ -35,7 +35,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:id])
+    @answer = current_user.answers.find(params[:id])
     if @answer.update(answer_params)
       redirect_to question_path(@answer.question)
     else
@@ -44,7 +44,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer = Answer.find(params[:id])
+    @answer = current_user.answers.find(params[:id])
     @answer.destroy
     @answers = @answer.question.answers
     respond_to do |format|

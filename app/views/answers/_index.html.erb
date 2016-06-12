@@ -2,7 +2,9 @@
   <% unless answer.id.nil? %>
     <%= simple_format(answer.content) %>
     <%= answer.user.nick_name %>
-    <%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %>
-    <%= link_to 'Destroy', question_answer_path(answer.question, answer), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+    <% if answer.user.id == current_user.id %>
+      <%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %>
+      <%= link_to 'Destroy', question_answer_path(answer.question, answer), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   <% end %>
 <% end %>
