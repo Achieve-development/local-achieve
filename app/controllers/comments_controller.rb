@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
 
       if @comment.save
         @comments = @comment.blog.comments
+        @comment = Comment.new
         format.html { redirect_to blog_path(@comment.blog_id) }
         format.js { render :index }
       else
@@ -50,7 +51,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     @comments = @comment.blog.comments
     respond_to do |format|
-      #format.html { redirect_to blog_path(@comment.blog) }
+      format.html { redirect_to blog_path(@comment.blog) }
       format.js { render :index }
     end
   end

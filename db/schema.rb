@@ -70,7 +70,8 @@ ActiveRecord::Schema.define(version: 20160611082252) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
-    t.text     "content"
+    t.string   "content"
+    t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "language_id"
     t.datetime "created_at",  null: false
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160611082252) do
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["language_id"], name: "index_questions_on_language_id", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",           null: false
@@ -117,4 +119,5 @@ ActiveRecord::Schema.define(version: 20160611082252) do
   add_foreign_key "comments", "users"
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "languages"
+  add_foreign_key "questions", "users"
 end
