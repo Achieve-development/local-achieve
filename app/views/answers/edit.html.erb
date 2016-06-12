@@ -1,6 +1,13 @@
 <h1>Editing Answer</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @answer %> |
-<%= link_to 'Back', answers_path %>
+<%= form_for(@answer, url: question_answer_path(@answer.question, @answer)) do |f| %>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :question_id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

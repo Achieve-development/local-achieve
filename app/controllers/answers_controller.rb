@@ -19,14 +19,15 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
   end
 
+
   def create
     @answer = Answer.new(answer_params)
-
     respond_to do |format|
       if @answer.save
-        @question = @answer.question
-        format.html { redirect_to question_path(@question.id) }
-        format.js
+        @answers = @answer.question.answers
+        @answer = Answer.new
+        format.html { redirect_to question_path(@answer.question) }
+        format.js { render :create }
       else
         format.html { render :new }
       end
@@ -35,24 +36,20 @@ class AnswersController < ApplicationController
 
   def update
     @answer = Answer.find(params[:id])
-    @question = @answer.question
-    respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to redirect_to question_path(@question.id) }
-        format.js
-      else
-        format.html { render :edit }
-      end
+    if @answer.update(answer_params)
+      redirect_to question_path(@answer.question)
+    else
+      format.html { render :edit }
     end
   end
 
   def destroy
     @answer = Answer.find(params[:id])
-    @question = @answer.question
     @answer.destroy
+    @answers = @answer.question.answers
     respond_to do |format|
-      format.html { redirect_to redirect_to question_path(@question.id) }
-      format.js {  }
+      format.html { redirect_to question_path(@question.id) }
+      format.js { render :index }
     end
   end
 

@@ -17,7 +17,9 @@
 
 <%= link_to 'Edit', edit_question_path(@question) %>
 
-<%= render partial: 'answers/index', locals: { answers: @answers } %>
-<%= render partial: 'answers/form', locals: { answers: @answer } %>
+<div id="answers_area">
+  <%= render partial: 'answers/index', locals: { answers: @answers } %>
+</div>
+<%= render partial: 'answers/form', locals: { answer: @answer } %>
 
 <%= link_to 'Back', questions_path %>
