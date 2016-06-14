@@ -25,6 +25,7 @@ class AnswersController < ApplicationController
     respond_to do |format|
       if @answer.save
         @answers = @answer.question.answers
+        AchieveMailer.answer_send(@answer).deliver
         @answer = Answer.new
         format.html { redirect_to question_path(@answer.question) }
         format.js { render :create }
