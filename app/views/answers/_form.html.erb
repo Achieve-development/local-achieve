@@ -1,7 +1,7 @@
 <%= form_for(answer, url: question_answers_path(answer.question), remote: true) do |f| %>
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_field :content %>
+    <%= f.text_area :content, type: 'text' %>
   </div>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :question_id %>
