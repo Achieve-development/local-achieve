@@ -10,7 +10,9 @@
   <p><%= @blog.content %></p>
 </div>
 
-<%= link_to 'ブログを編集する', edit_blog_path(@blog), class: 'btn btn-primary' %>
+<% if @blog.user = current_user %>
+  <%= link_to 'ブログを編集する', edit_blog_path(@blog), class: 'btn btn-primary' %>
+<% end %>
 
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments } %>
