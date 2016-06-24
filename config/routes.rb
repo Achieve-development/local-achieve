@@ -45,4 +45,9 @@ Rails.application.routes.draw do
     end
   end
 
+#会話機能
+  resources :conversations do
+    resources :messages
+  end
+
 end
