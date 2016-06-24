@@ -43,10 +43,10 @@ gem 'omniauth-facebook'
 
 #画像アップローダー
 gem 'carrierwave'
-#Bootstrap
-gem 'bootstrap-social-rails'
 #heroku logs -t
 gem 'rails_12factor', group: :production
+
+gem 'pusher'
 
 
 group :development, :test do
@@ -90,8 +90,6 @@ group :development, :test do
   gem "spring-commands-rspec"
 
   gem "xray-rails"
-
-  gem 'byebug'
 
 end
 
