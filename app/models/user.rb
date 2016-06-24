@@ -9,17 +9,13 @@ class User < ActiveRecord::Base
   has_many :answers, dependent: :destroy
 
 
-  #ユーザーとフォローは１対多の関係・ユーザーが削除されたらそれにひも付くフォローの関係も削除される
-  #has_many :relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destory
+  #ユーザーとフォロー&フォロワーは１対多の関係・ユーザーが削除されたらそれにひも付くフォローの関係も削除される
+  has_many :relationships, foreign_key: 'follower_id', dependent: :destory
+  has_many :reverse_relationships, foreign_key: 'followed_id', dependent: :destroy
 
-  #ユーザーとフォロワーは１対多の関係・ユーザーが削除されたらそれにひも付くフォロワーの関係も削除される
-  #has_many :reverse_relationships, foreign_key: 'followed_id', class_name: 'Relationship', dependent: :destroy
-
-  #フォローとユーザーは
-  #has_many :followed_users, through: :relationships, source: :followed
-
-  #
-  #has_many :followers, through: :reverse_relationships, source: :follower
+  #フォロー&フォロワーの相対的な関係を定義
+  has_many :followed_users, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_relationships, source: :follower
 
 
 
@@ -108,7 +104,7 @@ class User < ActiveRecord::Base
   def self.from_users_followed_by(user)
     followed_user_ids =
     "SELECT X.id FROM (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.followed_id WHERE relationships.follower_id = :user_id )
-     X INNER JOIN 
+     X INNER JOIN
     (SELECT users.* FROM users INNER JOIN relationships ON users.id = relationships.follower_id WHERE relationships.followed_id = :user_id )
     Y ON X.id = Y.id"
     where("id IN (#{followed_user_ids})", user_id: user.id)
