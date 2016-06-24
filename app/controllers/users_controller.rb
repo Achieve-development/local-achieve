@@ -1,20 +1,25 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :following, :followers]
+
   def index
     @users = User.all
   end
 
   def show
-    #@user = User.find(params[:id])
   end
 
   def following
-    @user = User.find(params[:id])
     @users = @user.followed_users
     render 'show_follow'
   end
 
   def followers
-    @user = User.find(params[:id])
     @users = @user.followers
+    render 'show_follow'
   end
+
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
 end
