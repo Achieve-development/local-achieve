@@ -7,8 +7,8 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    @comment = @blog.comments.build
-    @comments = @blog.comments
+    @comment = @blog.comments.build #１つのブログに紐づくインスタンスを生成する。
+    @comments = @blog.comments #１つのブログに紐づくコメントを全部とってくる
   end
 
   def new

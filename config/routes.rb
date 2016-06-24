@@ -3,10 +3,20 @@ Rails.application.routes.draw do
 #トップ画面
   root 'top#index'
 
+#ログイン機能・SNS認証機能
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+
 #ブログ投稿機能（コメントも投稿できるようにする）
   resources :blogs do
     resources :comments
   end
+
+  resources :relationships, only: [:create, :destroy]
 
 #Q&A機能
   resources :questions do
@@ -28,12 +38,11 @@ Rails.application.routes.draw do
 #お問い合わせ受信機能
   get 'contacts/receive' => 'contacts#receive'
 
-#ログイン機能・SNS認証機能
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations',
-    passwords: 'users/passwords',
-    omniauth_callbacks: 'users/omniauth_callbacks'
-  }
+#フォローフォロワー機能
+  resources :users, only: [:index, :show, :edit, :update] do
+    member do
+      get :following, :followers
+    end
+  end
 
 end
