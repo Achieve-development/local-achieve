@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
 
   #ユーザーとフォロー&フォロワーは１対多の関係・ユーザーが削除されたらそれにひも付くフォローの関係も削除される
-  has_many :relationships, foreign_key: 'follower_id', dependent: :destory
+  has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
   has_many :reverse_relationships, foreign_key: 'followed_id', dependent: :destroy
 
   #フォロー&フォロワーの相対的な関係を定義

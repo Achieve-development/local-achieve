@@ -3,6 +3,6 @@
     user_name: "Test Diver#{n}",
     nick_name: "Test Diver#{n}",
     email: "diveintocode#{n}@example.com",
-    password: 'iwillbeanengineer’,
-    uid: “#{n}”)
+    password: "iwillbeanengineer",
+    uid: "#{n}")
 end
