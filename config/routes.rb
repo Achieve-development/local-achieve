@@ -23,12 +23,6 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-#カテゴリー登録機能
-  resources :categories, only: [:index, :create, :destroy]
-
-#プログラミング言語登録機能
-  resources :languages, only: [:index, :create, :destroy]
-
 #お問い合わせ投稿機能
   get 'contacts/new' => 'contacts#new'
   post 'contacts/new' => 'contacts#new'
@@ -40,6 +34,8 @@ Rails.application.routes.draw do
 
 #フォローフォロワー機能
   resources :users, only: [:index, :show, :edit, :update] do
+    resources :tasks
+    resources :notifications, only: [:index]
     member do
       get :following, :followers
     end
@@ -49,5 +45,11 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
+#カテゴリー登録機能
+  resources :categories, only: [:index, :create, :destroy]
+
+#プログラミング言語登録機能
+  resources :languages, only: [:index, :create, :destroy]
 
 end
