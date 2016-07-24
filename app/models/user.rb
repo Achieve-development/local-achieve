@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  paginates_per 20 # 1ページあたり20項目表示
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,
          :validatable, :confirmable, :omniauthable

@@ -1,5 +1,6 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!
+  before_action :follow_user?, only: [:index, :show]
 
   def index
     @blogs = Blog.all
@@ -8,7 +9,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find(params[:id])
     @comment = @blog.comments.build
-    @comments = @blog.comments 
+    @comments = @blog.comments
   end
 
   def new
@@ -47,5 +48,9 @@ class BlogsController < ApplicationController
   private
     def blog_params
       params.require(:blog).permit(:title, :content, :user_id)
+    end
+
+    def follow_user?
+      @follow_user_ids = User.from_users_followed_by(current_user).ids
     end
 end
