@@ -9,13 +9,13 @@ class ContactsController < ApplicationController
 
   def confirm
     @contact = Contact.new(contact_params)
-    redirect_to contacts_new_path if @contact.invalid?
+    render :new if @contact.invalid?
   end
 
   def create
     @contact = Contact.new(contact_params)
-    render :create if @contact.save
-    render :new if params[:back]
+    @contact.save
+    redirect_to root_path, notice: 'お問い合わせありがとうございました！！'
   end
 
   def receive
