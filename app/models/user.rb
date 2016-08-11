@@ -9,11 +9,13 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :tasks, dependent: :destroy
+  has_many :submit_requests, dependent: :destroy
 
 
   #ユーザーとフォロー&フォロワーは１対多の関係・ユーザーが削除されたらそれにひも付くフォローの関係も削除される
   has_many :relationships, foreign_key: 'follower_id', dependent: :destroy
-  has_many :reverse_relationships, foreign_key: 'followed_id', dependent: :destroy
+  has_many :reverse_relationships, foreign_key: 'followed_id', class_name: "Relationship", dependent: :destroy
 
   #フォロー&フォロワーの相対的な関係を定義
   has_many :followed_users, through: :relationships, source: :followed
@@ -99,7 +101,7 @@ class User < ActiveRecord::Base
 
   #「自分が」フォローしあっているユーザ一覧を取得する
   def friend
-    User.from_users_followed_by(self)
+    followers & followed_users
   end
 
   #フォローしあっているユーザ一覧を取得する

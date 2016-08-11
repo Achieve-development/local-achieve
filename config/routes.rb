@@ -34,6 +34,14 @@ Rails.application.routes.draw do
 #フォローフォロワー機能
   resources :users, only: [:index, :show, :edit, :update] do
     resources :tasks
+    resources :submit_requests, shallow: true do
+      get 'approve'
+      get 'unapprove'
+      get 'reject'
+      collection do
+        get 'inbox'
+      end
+    end
     resources :notifications, only: [:index]
     member do
       get :following, :followers
