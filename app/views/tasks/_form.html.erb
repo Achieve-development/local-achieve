@@ -28,10 +28,14 @@
     <%= f.label :deadline %><br>
     <%= f.datetime_select :deadline %>
   </div>
-  <div class="field">
-    <%= f.label :done %><br>
-    <%= f.check_box :done %>
-  </div>
+
+  <% if action_name == 'edit' %>
+    <div class="field">
+      <%= f.label :done %><br>
+      <%= f.check_box :done %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :status %><br>
     <%= f.select :status, [["未着手", "0"], ["対応中", "1"]] %>
