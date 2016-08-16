@@ -1,5 +1,4 @@
 class SubmitRequestsController < ApplicationController
-  before_action :set_submit_request, only: [:show, :edit, :update, :destroy]
   before_action :submit_params, only: [:approve, :unapprove]
 
   def index
@@ -24,14 +23,17 @@ class SubmitRequestsController < ApplicationController
   end
 
   def show
+    @submit_request = SubmitRequest.find(params[:id])
   end
 
   def edit
+    @submit_request = SubmitRequest.find(params[:id])
     @users = current_user.friend #相互フォローユーザー
     @tasks = current_user.tasks.where(done: false) #自分が作成した未完了タスク
   end
 
   def update
+    @submit_request = SubmitRequest.find(params[:id])
     if @submit_request.update(submit_request_params)
       @submit_request.task.update(charge_id: submit_request_params[:user_id])
       redirect_to user_submit_requests_path(user_id: current_user.id), notice: '依頼を更新しました。'
@@ -41,6 +43,12 @@ class SubmitRequestsController < ApplicationController
   end
 
   def destroy
+    @submit_request = SubmitRequest.find(params[:id])
+    @submit_request.destroy
+    @submit_requests = SubmitRequest.where(user_id: current_user.id).order(updated_at: :desc)
+    respond_to do |format|
+      format.js { render :reaction_index }
+    end
   end
 
   def approve
@@ -75,10 +83,6 @@ class SubmitRequestsController < ApplicationController
   end
 
   private
-    def set_submit_request
-      @submit_request = SubmitRequest.find(params[:id])
-    end
-
     def submit_params
       @submit_request = SubmitRequest.find(params[:submit_request_id].to_i)
     end
