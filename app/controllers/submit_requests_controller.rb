@@ -1,5 +1,5 @@
 class SubmitRequestsController < ApplicationController
-  before_action :submit_params, only: [:approve, :unapprove]
+  before_action :submit_params, only: [:approve, :unapprove, :reject]
 
   def index
     @submit_requests = SubmitRequest.where(user_id: current_user.id).order(updated_at: :desc)
@@ -74,7 +74,7 @@ class SubmitRequestsController < ApplicationController
     @submit_request.task.update(status: 8, charge_id: current_user.id)
     @submit_requests = SubmitRequest.where(charge_id: current_user.id).order(updated_at: :desc)
     respond_to do |format|
-      format.js { render :reaction_index }
+      format.js { render :reaction_inbox }
     end
   end
 
