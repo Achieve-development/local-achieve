@@ -1,4 +1,5 @@
 class Message < ActiveRecord::Base
+  has_many :notifications, dependent: :destroy
   belongs_to :conversation
   belongs_to :user
 

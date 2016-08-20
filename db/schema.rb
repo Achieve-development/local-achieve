@@ -90,12 +90,11 @@ ActiveRecord::Schema.define(version: 20160811071334) do
   create_table "notifications", force: :cascade do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.integer  "comment_id"
-    t.boolean  "read"
+    t.boolean  "read",            default: false
     t.integer  "conversation_id"
     t.integer  "message_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "questions", force: :cascade do |t|

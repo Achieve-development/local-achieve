@@ -3,8 +3,7 @@ class CreateNotifications < ActiveRecord::Migration
     create_table :notifications do |t|
       t.integer :sender_id
       t.integer :recipient_id
-      t.integer :comment_id
-      t.boolean :read
+      t.boolean :read, default: false
       t.integer :conversation_id
       t.integer :message_id
 

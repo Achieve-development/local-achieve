@@ -41,6 +41,8 @@ gem 'omniauth-twitter'
 
 gem 'omniauth-facebook'
 
+gem 'faker'
+
 #画像アップローダー
 gem 'carrierwave'
 #heroku logs -t
@@ -56,6 +58,8 @@ group :development, :test do
   gem 'byebug'
 
   gem 'dotenv'
+
+  gem 'dotenv-rails'
 
   gem 'awesome_print'
 

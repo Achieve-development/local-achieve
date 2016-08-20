@@ -6,8 +6,8 @@
       <li>
         <span class="label label-pill label-default"><%= display_read_status(notification.read) %></span>
         <p>
-          <%= receive_user(notification) %>さんが
-          <small class="dropdown">ブログ「<%= notification.comment.blog.title %>」のコメントしました。</small>
+          <%= receive_user(notification) %>さんからメッセージが届いています。
+          <%= link_to '詳細はこちら！', conversation_messages_path(notification.conversation) %>
         </p>
         <p class="palette-paragraph text-right">
           <small class="dropdown">
