@@ -30,7 +30,6 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.build(message_params)
     @notification = @message.notifications.build(recipient_id: @message.conversation.recipient_id, sender_id: current_user.id, conversation_id: @message.conversation_id)
-    binding.pry
     if @message.save
       Pusher["notifications"+@message.conversation.recipient_id.to_s].trigger("message", {messaging: "メッセージが届いています。：#{@message.body}"})
       redirect_to conversation_messages_path(@conversation)
