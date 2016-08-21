@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  after_action :sending_pusher, only: [:create]
 
   def index
     @comments = Comment.all
@@ -31,7 +30,7 @@ class CommentsController < ApplicationController
         @comments = @comment.blog.comments
         @comment = Comment.new
         format.html { redirect_to blog_path(@comment.blog_id) }
-        format.js { render :index }
+        format.js { render :create }
       else
         format.html { render :new }
       end
@@ -61,10 +60,6 @@ class CommentsController < ApplicationController
   private
     def comment_params
       params.require(:comment).permit(:blog_id, :user_id, :content)
-    end
-
-    def sending_pusher
-      Notification.sending_pusher(@notification.recipient_id)
     end
 
 end
