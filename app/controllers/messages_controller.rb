@@ -23,13 +23,11 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.build
   end
 
-  def new
-    @message = @conversation.messages.build
-  end
+
 
   def create
     @message = @conversation.messages.build(message_params)
-    @notification = @message.notifications.build(recipient_id: @message.conversation.recipient_id, sender_id: current_user.id, conversation_id: @message.conversation_id)
+    @notification = @message.notifications.build(recipient_id: @message.conversation.recipient_id, sender_id: @message.conversation.sender_id, conversation_id: @message.conversation_id)
     if @message.save
       Pusher["notifications"+@message.conversation.recipient_id.to_s].trigger("message", {messaging: "メッセージが届いています。：#{@message.body}"})
       redirect_to conversation_messages_path(@conversation)
@@ -39,6 +37,10 @@ class MessagesController < ApplicationController
   private
   def find_conversation
     @conversation = Conversation.find(params[:conversation_id])
+    if @conversation.sender != current_user
+      @conversation.recipient_id = @conversation.sender_id
+      @conversation.sender_id = current_user.id
+    end
   end
 
   def message_params
