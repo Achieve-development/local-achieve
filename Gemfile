@@ -52,14 +52,18 @@ gem 'pusher'
 
 gem 'kaminari'
 
+gem 'fog'
+
+gem 'dotenv-rails'
+
+gem 'unicorn'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   gem 'dotenv'
-
-  gem 'dotenv-rails'
 
   gem 'awesome_print'
 
@@ -96,6 +100,16 @@ group :development, :test do
   gem "spring-commands-rspec"
 
   gem "xray-rails"
+
+  gem 'capistrano', '3.6.0'
+
+  gem 'capistrano-bundler'
+
+  gem 'capistrano-rails'
+
+  gem 'capistrano-rbenv'
+
+  gem 'capistrano3-unicorn'
 
 end
 
