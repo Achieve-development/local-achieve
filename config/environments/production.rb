@@ -37,5 +37,5 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: 'evening-inlet-54473.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: '52.197.67.69' }
 end
