@@ -72,9 +72,7 @@ group :development, :test do
   gem 'binding_of_caller'
 
   gem 'database_rewinder'
-
-  gem 'factory_girl_rails'
-
+  
   gem 'hirb-unicode'
 
   gem 'hirb'
@@ -83,7 +81,7 @@ group :development, :test do
 
   gem 'pry-doc'
 
-  gem 'pry'
+  gem 'pry-rails'
 
   gem 'quiet_assets'
 
@@ -111,6 +109,10 @@ group :development, :test do
 
   gem 'capistrano3-unicorn'
 
+  gem "rspec-rails"
+
+  gem "factory_girl_rails"
+
 end
 
 group :development do
@@ -121,4 +123,11 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem "capybara"
+  gem "database_cleaner"
+  gem "launchy"
+  gem "selenium-webdriver"
 end

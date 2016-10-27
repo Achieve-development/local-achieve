@@ -3,4 +3,6 @@ class Blog < ActiveRecord::Base
   belongs_to :user
   #ブログとコメントは１対多の関係
   has_many :comments
+
+  validates :title, presence: true
 end
